@@ -1,128 +1,285 @@
-"
-<?php
+" <?php
 
-session_start();
+$user_agent = $_SERVER['HTTP_USER_AGENT'];
 
-if(isset($_SESSION['counter']))
+if (strpos($user_agent, 'MSIE') !== false) {
 
-{
+$browser = 'Internet Explorer';
 
-$_SESSION['counter']+=1;
+} elseif (strpos($user_agent, 'Firefox') !== false) {
+
+$browser = 'Mozilla Firefox';
+
+} elseif (strpos($user_agent, 'Chrome') !== false) {
+
+$browser = 'Google Chrome';
+
+} elseif (strpos($user_agent, 'Safari') !== false) {
+
+$browser = 'Apple Safari';
+
+} elseif (strpos($user_agent, 'Opera') !== false) {
+
+$browser = 'Opera';
+
+} else {
+
+$browser = 'Unknown';
 
 }
 
-else
-
-{
-
-$_SESSION['counter']=1;
-
-}
-
-$msg = "number of visit to this page is:".$_SESSION['counter'];
-
-$msg .= " in this session.";
+echo "Your browser is: $browser";
 
 ?>
 
-<html>
 
-<head>
 
-<title>Setting up a PHP session</title>
 
-</head>
 
-<body>
+
+
+
+<?php
+// Initialize an empty variable to store the user's message
+$message = '';
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Get the user's message from the form submission
+$message = $_POST['message'];
+// Filter out any HTML tags from the user's message
+$message = strip_tags($message);
+$message = htmlentities($message);
+}
+?>
+<!-- Example form with POST method -->
+<form method="POST">
+<label for="message">Message:</label>
+<textarea name="message" id="message" cols="30"
+rows="10"><?php echo $message; ?></textarea>
+<br>
+<button type="submit">Submit</button>
+</form>
+<!-- Display the user's message after filtering out any HTML
+tags -->
+<p>User's message: <?php echo $message; ?></p>
+
+
+
+
+
+
+<?php
+//handling form data with custom array
+// Initialize an empty array to store form data
+$form_data = array();
+// Check if the form has been submitted
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+// Store form data in custom array
+$form_data['name'] = $_POST['name'];
+$form_data['email'] = $_POST['email'];
+$form_data['message'] = $_POST['message'];
+// Validate form data (e.g. check if name and email are not
+empty)
+if (empty($form_data['name'])) {
+echo "Please enter your name";
+}
+if (empty($form_data['email'])) {
+echo "Please enter your email";
+}
+// Process form data (e.g. send an email, save to database)
+// ...
+}
+?>
+<!-- Example form with POST method -->
+<form method="POST">
+<label for="name">Name:</label>
+<input type="text" name="name" id="name">
+<br>
+<label for="email">Email:</label>
+<input type="email" name="email" id="email">
+<br>
+<label for="message">Message:</label>
+<textarea name="message" id="message" cols="30"
+rows="10"></textarea>
+<br>
+<button type="submit">Submit</button>
+</form>
+
+
+
+
+
+
 
 <?php
 
-echo ($msg);
+// Initialize an empty array to store form data
+
+$form_data = array();
+
+// Check if the form has been submitted
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+// Store form data in custom array
+
+$form_data['name'] = $_POST['name'];
+
+$form_data['email'] = $_POST['email'];
+
+// Validate form data (e.g. check if name and email are not
+
+empty)
+
+if (empty($form_data['name'])) {
+
+echo "Please enter your name";
+
+}
+
+if (empty($form_data['email'])) {
+
+echo "Please enter your email";
+
+}
+
+// Process form data (e.g. send an email, save to database)
+
+// ...
+
+}
 
 ?>
 
-</body>
+<!-- Example form with POST method -->
 
-</html>
+<form method="POST">
 
+<label for="name">Name:</label>
 
+<input type="text" name="name" id="name" value="<?php echo
 
+$form_data['name']; ?>">
 
+<br>
 
+<label for="email">Email:</label>
 
+<input type="email" name="email" id="email" value="<?php echo
 
+$form_data['email']; ?>">
 
+<br>
 
-
-<!DOCTYPE html>
-
-<html>
-
-<head>
-
-<title>Form Validation</title>
-
-</head>
-
-<body>
-
-<h1>Final Validation</h1>
-
-<form name="frm">
-
-Enter Name<input type="text" name="t1"><br>
-
-Enter salary<input type="text" name="t2"><br>
-
-Enter phone<input type="text" name="t3"><br>
-
-<input type="button" value="submit" onclick="logic()">
+<button type="submit">Submit</button>
 
 </form>
 
-<script language="javascript">
 
-function logic()
 
+
+
+
+
+
+
+<?php
+
+print_r($_POST);
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+// Get all form data
+
+$form_data = $_POST;
+
+// Display all form data
+
+echo "<h2>Form Data:</h2>";
+
+foreach ($form_data as $key => $value) {
+
+echo "<strong>$key:</strong> $value <br>";
+
+}
+
+}
+
+?>
+
+<!-- Example form with POST method -->
+
+<form method="POST">
+
+<label for="name">Name:</label>
+
+<input type="text" name="name" id="name">
+
+<br>
+
+<label for="email">Email:</label>
+
+<input type="email" name="email" id="email">
+
+<br>
+
+<label for="message">Message:</label>
+
+<textarea name="message" id="message" cols="30"
+
+rows="10"></textarea>
+
+<br>
+
+<button type="submit">Submit</button>
+
+</form>
+
+
+
+
+
+
+
+
+
+<?php
+class Person
 {
-
-var letter = /^[A-Za-z ]+$/;
-
-if(!document.frm.t1.value.match(letter))
-
+public $name;
+public $age;
+public function __construct($name, $age)
 {
-
-alert("Name must have alphabetic characters
-
-only!");
-
+$this->name = $name;
+$this->age = $age;
 }
-
-var number = /^[0-9]+$/;
-
-if(!document.frm.t2.value.match(number))
-
+private function privateMethod()
 {
-
-alert("Salary should be a numeric value!");
-
+echo "I am a private method.";
 }
-
-if(!document.frm.t3.value.match(number))
-
-{alert("Phone number should be a numeric
-
-value!");
-
+protected function protectedMethod()
+{
+echo "I am a protected method.";
 }
-
+public function publicMethod()
+{
+echo "<font color=hotpink face = comic sans ms
+size=7>hello my name is ".$this->name." i am ".$this->age .
+"years old</font>";
 }
+}$person = new Person("Mimansa", 4);
+// Access private and protected methods
+// This will result in a fatal error since private methods can
+only be accessed within the class itself
+//$person->privateMethod();
+// This will also result in a fatal error since protected
+methods can only be accessed within the class itself or its
+subclasses
+//$person->protectedMethod();
+// Access public method
+$person->publicMethod();
+?>
 
-</script>
-
-</body>
-
-</html>
 
 
 
@@ -134,26 +291,214 @@ value!");
 
 
 <?php
-// Start the session
-session_start();
-// Set session variables
-$_SESSION["name"] = "Prajwal";
-$_SESSION["age"] = 20;
-$_SESSION["email"] = "prajwal@example.com";
-// Update session variables
-$_SESSION["age"] = 21;
-$_SESSION["name"] = "Prajwal";
-$_SESSION["email"] = "prajwal21@example.com";
-// Display session variables
-echo "Name: " . $_SESSION["name"] . "<br>";
-echo "Age: " . $_SESSION["age"] . "<br>";
-echo "Email: " . $_SESSION["email"] . "<br>";
-// Remove all session variables
-session_unset();
-// Destroy the session
-session_destroy();
+
+class Person
+
+{
+
+public $name;
+
+public $age;
+
+public function __construct($name, $age)
+
+{
+
+$this->name = $name;
+
+$this->age = $age;
+
+}
+
+private function privateMethod()
+
+{
+
+echo "I am a private method.";
+
+}
+
+protected function protectedMethod()
+
+{
+
+echo "I am a protected method.";
+
+}
+
+public function publicMethod()
+
+{echo "<font color=hotpink face = comic sans ms
+
+size=7>hello my name is ".$this->name." i am ".$this->age .
+
+"years old</font>";
+
+}
+
+}
+
+// Create a new person object
+
+$person = new Person("Mimansa", 4);
+
+// Serialization
+
+$serialized = serialize($person);
+
+echo "Serialized data: " . $serialized . "<br>";
+
+// Unserialization
+
+$unserialized = unserialize($serialized);
+
+echo "Unserialized data: " . $unserialized->name . " " .
+
+$unserialized->age . "<br>";
+
+// Access private and protected methods
+
+// This will result in a fatal error since private methods can
+
+only be accessed within the class itself
+
+//$person->privateMethod();
+
+// This will also result in a fatal error since protected
+
+methods can only be accessed within the class itself or its
+
+subclasses
+
+//$person->protectedMethod();
+
+// Access public method
+
+$person->publicMethod();
+
 ?>
 
 
 
-"
+
+
+
+
+
+<?php
+
+class Person
+
+{
+
+public $name;
+
+public $age;
+
+public function __construct($name, $age)
+
+{
+
+$this->name = $name;
+
+$this->age = $age;
+
+}
+
+private function privateMethod()
+
+{
+
+echo "I am a private method.";
+
+}
+
+protected function protectedMethod()
+
+{
+
+echo "I am a protected method.";
+
+}
+
+public function publicMethod()
+
+{
+
+echo "<font color=hotpink face = comic sans ms
+
+size=7>hello my name is ".$this->name." i am ".$this->age .
+
+"years old</font>";
+
+}
+
+}$person = new Person("Mimansa", 4);
+
+// Introspection
+
+$class_properties = get_class_vars("Person");
+
+$object_properties = get_object_vars($person);
+
+$class_methods = get_class_methods("Person");
+
+$object_class = get_class($person);
+
+echo "Class properties: <br>";
+
+print_r($class_properties);
+
+echo "<br>";
+
+echo "Object properties: <br>";
+
+print_r($object_properties);
+
+echo "<br>";
+
+echo "Class methods: <br>";
+
+print_r($class_methods);
+
+echo "<br>";
+
+echo "Object class: <br>";
+
+print_r($object_class);
+
+echo "<br>";
+
+// Access private and protected methods
+
+// This will result in a fatal error since private methods can
+
+only be accessed within the class itself
+
+//$person->privateMethod();
+
+// This will also result in a fatal error since protected
+
+methods can only be accessed within the class itself or its
+
+subclasses
+
+//$person->protectedMethod();
+
+// Access public method
+
+$person->publicMethod();
+
+?>
+
+
+
+
+
+
+
+
+
+
+
+
