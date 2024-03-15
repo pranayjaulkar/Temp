@@ -1,34 +1,159 @@
-"<!DOCTYPE html>
-
+"
 <?php
 
-$cookie_name = "user";
+session_start();
 
-$cookie_value = "John Doe";
+if(isset($_SESSION['counter']))
 
-setcookie($cookie_name, $cookie_value, time() + (86400 * 30),
+{
 
-"/"); // 86400 = 1 day
+$_SESSION['counter']+=1;
+
+}
+
+else
+
+{
+
+$_SESSION['counter']=1;
+
+}
+
+$msg = "number of visit to this page is:".$_SESSION['counter'];
+
+$msg .= " in this session.";
 
 ?>
 
 <html>
 
+<head>
+
+<title>Setting up a PHP session</title>
+
+</head>
+
 <body>
 
 <?php
 
-if(!isset($_COOKIE[$cookie_name])) {
+echo ($msg);
 
-echo "Cookie named '" . $cookie_name . "' is not set!";
+?>
 
-} else {echo "Cookie '" . $cookie_name . "' is set!<br>";
+</body>
 
-echo "Value is: " . $_COOKIE[$cookie_name];
+</html>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>Form Validation</title>
+
+</head>
+
+<body>
+
+<h1>Final Validation</h1>
+
+<form name="frm">
+
+Enter Name<input type="text" name="t1"><br>
+
+Enter salary<input type="text" name="t2"><br>
+
+Enter phone<input type="text" name="t3"><br>
+
+<input type="button" value="submit" onclick="logic()">
+
+</form>
+
+<script language="javascript">
+
+function logic()
+
+{
+
+var letter = /^[A-Za-z ]+$/;
+
+if(!document.frm.t1.value.match(letter))
+
+{
+
+alert("Name must have alphabetic characters
+
+only!");
 
 }
 
-?><p><strong>Note:</strong> You might have to reload the page to
+var number = /^[0-9]+$/;
 
-see the value of the cookie.</p>
-</body></html>"
+if(!document.frm.t2.value.match(number))
+
+{
+
+alert("Salary should be a numeric value!");
+
+}
+
+if(!document.frm.t3.value.match(number))
+
+{alert("Phone number should be a numeric
+
+value!");
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+<?php
+// Start the session
+session_start();
+// Set session variables
+$_SESSION["name"] = "Prajwal";
+$_SESSION["age"] = 20;
+$_SESSION["email"] = "prajwal@example.com";
+// Update session variables
+$_SESSION["age"] = 21;
+$_SESSION["name"] = "Prajwal";
+$_SESSION["email"] = "prajwal21@example.com";
+// Display session variables
+echo "Name: " . $_SESSION["name"] . "<br>";
+echo "Age: " . $_SESSION["age"] . "<br>";
+echo "Email: " . $_SESSION["email"] . "<br>";
+// Remove all session variables
+session_unset();
+// Destroy the session
+session_destroy();
+?>
+
+
+
+"
