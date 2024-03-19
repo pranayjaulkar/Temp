@@ -1,495 +1,113 @@
-" <?php
+PROGRAM NO . 01
 
-$user_agent = $_SERVER['HTTP_USER_AGENT'];
+Write a program in JAVA to find out volume of a box
 
-if (strpos($user_agent, 'MSIE') !== false) {
-
-$browser = 'Internet Explorer';
-
-} elseif (strpos($user_agent, 'Firefox') !== false) {
-
-$browser = 'Mozilla Firefox';
-
-} elseif (strpos($user_agent, 'Chrome') !== false) {
-
-$browser = 'Google Chrome';
-
-} elseif (strpos($user_agent, 'Safari') !== false) {
-
-$browser = 'Apple Safari';
-
-} elseif (strpos($user_agent, 'Opera') !== false) {
-
-$browser = 'Opera';
-
-} else {
-
-$browser = 'Unknown';
-
-}
-
-echo "Your browser is: $browser";
-
-?>
-
-
-
-
-
-
-
-
-<?php
-// Initialize an empty variable to store the user's message
-$message = '';
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-// Get the user's message from the form submission
-$message = $_POST['message'];
-// Filter out any HTML tags from the user's message
-$message = strip_tags($message);
-$message = htmlentities($message);
-}
-?>
-<!-- Example form with POST method -->
-<form method="POST">
-<label for="message">Message:</label>
-<textarea name="message" id="message" cols="30"
-rows="10"><?php echo $message; ?></textarea>
-<br>
-<button type="submit">Submit</button>
-</form>
-<!-- Display the user's message after filtering out any HTML
-tags -->
-<p>User's message: <?php echo $message; ?></p>
-
-
-
-
-
-
-<?php
-//handling form data with custom array
-// Initialize an empty array to store form data
-$form_data = array();
-// Check if the form has been submitted
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-// Store form data in custom array
-$form_data['name'] = $_POST['name'];
-$form_data['email'] = $_POST['email'];
-$form_data['message'] = $_POST['message'];
-// Validate form data (e.g. check if name and email are not
-empty)
-if (empty($form_data['name'])) {
-echo "Please enter your name";
-}
-if (empty($form_data['email'])) {
-echo "Please enter your email";
-}
-// Process form data (e.g. send an email, save to database)
-// ...
-}
-?>
-<!-- Example form with POST method -->
-<form method="POST">
-<label for="name">Name:</label>
-<input type="text" name="name" id="name">
-<br>
-<label for="email">Email:</label>
-<input type="email" name="email" id="email">
-<br>
-<label for="message">Message:</label>
-<textarea name="message" id="message" cols="30"
-rows="10"></textarea>
-<br>
-<button type="submit">Submit</button>
-</form>
-
-
-
-
-
-
-
-<?php
-
-// Initialize an empty array to store form data
-
-$form_data = array();
-
-// Check if the form has been submitted
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-// Store form data in custom array
-
-$form_data['name'] = $_POST['name'];
-
-$form_data['email'] = $_POST['email'];
-
-// Validate form data (e.g. check if name and email are not
-
-empty)
-
-if (empty($form_data['name'])) {
-
-echo "Please enter your name";
-
-}
-
-if (empty($form_data['email'])) {
-
-echo "Please enter your email";
-
-}
-
-// Process form data (e.g. send an email, save to database)
-
-// ...
-
-}
-
-?>
-
-<!-- Example form with POST method -->
-
-<form method="POST">
-
-<label for="name">Name:</label>
-
-<input type="text" name="name" id="name" value="<?php echo
-
-$form_data['name']; ?>">
-
-<br>
-
-<label for="email">Email:</label>
-
-<input type="email" name="email" id="email" value="<?php echo
-
-$form_data['email']; ?>">
-
-<br>
-
-<button type="submit">Submit</button>
-
-</form>
-
-
-
-
-
-
-
-
-
-<?php
-
-print_r($_POST);
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-
-// Get all form data
-
-$form_data = $_POST;
-
-// Display all form data
-
-echo "<h2>Form Data:</h2>";
-
-foreach ($form_data as $key => $value) {
-
-echo "<strong>$key:</strong> $value <br>";
-
-}
-
-}
-
-?>
-
-<!-- Example form with POST method -->
-
-<form method="POST">
-
-<label for="name">Name:</label>
-
-<input type="text" name="name" id="name">
-
-<br>
-
-<label for="email">Email:</label>
-
-<input type="email" name="email" id="email">
-
-<br>
-
-<label for="message">Message:</label>
-
-<textarea name="message" id="message" cols="30"
-
-rows="10"></textarea>
-
-<br>
-
-<button type="submit">Submit</button>
-
-</form>
-
-
-
-
-
-
-
-
-
-<?php
-class Person
-{
-public $name;
-public $age;
-public function __construct($name, $age)
-{
-$this->name = $name;
-$this->age = $age;
-}
-private function privateMethod()
-{
-echo "I am a private method.";
-}
-protected function protectedMethod()
-{
-echo "I am a protected method.";
-}
-public function publicMethod()
-{
-echo "<font color=hotpink face = comic sans ms
-size=7>hello my name is ".$this->name." i am ".$this->age .
-"years old</font>";
-}
-}$person = new Person("Mimansa", 4);
-// Access private and protected methods
-// This will result in a fatal error since private methods can
-only be accessed within the class itself
-//$person->privateMethod();
-// This will also result in a fatal error since protected
-methods can only be accessed within the class itself or its
-subclasses
-//$person->protectedMethod();
-// Access public method
-$person->publicMethod();
-?>
-
-
-
-
-
-
-
-
-
-
-
-<?php
-
-class Person
+class Box
 
 {
 
-public $name;
+double length;
 
-public $age;
+double width;
 
-public function __construct($name, $age)
+double height;
 
-{
-
-$this->name = $name;
-
-$this->age = $age;
-
-}
-
-private function privateMethod()
+void getdata(double l,double w,double h)
 
 {
 
-echo "I am a private method.";
+ length=l;
 
-}
+ width=w;
 
-protected function protectedMethod()
+ height=h;
 
-{
+ }
 
-echo "I am a protected method.";
-
-}
-
-public function publicMethod()
-
-{echo "<font color=hotpink face = comic sans ms
-
-size=7>hello my name is ".$this->name." i am ".$this->age .
-
-"years old</font>";
-
-}
-
-}
-
-// Create a new person object
-
-$person = new Person("Mimansa", 4);
-
-// Serialization
-
-$serialized = serialize($person);
-
-echo "Serialized data: " . $serialized . "<br>";
-
-// Unserialization
-
-$unserialized = unserialize($serialized);
-
-echo "Unserialized data: " . $unserialized->name . " " .
-
-$unserialized->age . "<br>";
-
-// Access private and protected methods
-
-// This will result in a fatal error since private methods can
-
-only be accessed within the class itself
-
-//$person->privateMethod();
-
-// This will also result in a fatal error since protected
-
-methods can only be accessed within the class itself or its
-
-subclasses
-
-//$person->protectedMethod();
-
-// Access public method
-
-$person->publicMethod();
-
-?>
-
-
-
-
-
-
-
-
-<?php
-
-class Person
+double volume()
 
 {
 
-public $name;
+ double volume1 = length*height*width;
 
-public $age;
-
-public function __construct($name, $age)
-
-{
-
-$this->name = $name;
-
-$this->age = $age;
+ return(volume1);
 
 }
 
-private function privateMethod()
+void display()
 
 {
 
-echo "I am a private method.";
+ System.out.println("Length="+length);
+
+ System.out.println("Width="+width);
+
+ System.out.println("Heigth="+height);
+
+ System.out.println("Volume of Box="+volume());
+
+ }
 
 }
 
-protected function protectedMethod()
+class TextBox
 
 {
 
-echo "I am a protected method.";
+ public static void main(String args[])
 
-}
+ {
 
-public function publicMethod()
+ Box b=new Box();
+
+ b.getdata(5.0,7.0,6.0);
+
+ b.volume();
+
+ b.display();
+
+ }
+
+ }
+
+
+
+
+PROGRAM NO .02
+
+Write a program to declares a class ,object and also it access 
+
+the data member of its class
+
+class Calculate
 
 {
 
-echo "<font color=hotpink face = comic sans ms
+static int cube(int x)
 
-size=7>hello my name is ".$this->name." i am ".$this->age .
+{
 
-"years old</font>";
+ return(x*x*x);
+
+ }
 
 }
 
-}$person = new Person("Mimansa", 4);
+class Cube
 
-// Introspection
+{
 
-$class_properties = get_class_vars("Person");
+ public static void main( String args[])
 
-$object_properties = get_object_vars($person);
+ {
 
-$class_methods = get_class_methods("Person");
+ Calculate c= new Calculate();
 
-$object_class = get_class($person);
+ System.out.println("The cube of given no. is "+c.cube(4));
 
-echo "Class properties: <br>";
+ }
 
-print_r($class_properties);
-
-echo "<br>";
-
-echo "Object properties: <br>";
-
-print_r($object_properties);
-
-echo "<br>";
-
-echo "Class methods: <br>";
-
-print_r($class_methods);
-
-echo "<br>";
-
-echo "Object class: <br>";
-
-print_r($object_class);
-
-echo "<br>";
-
-// Access private and protected methods
-
-// This will result in a fatal error since private methods can
-
-only be accessed within the class itself
-
-//$person->privateMethod();
-
-// This will also result in a fatal error since protected
-
-methods can only be accessed within the class itself or its
-
-subclasses
-
-//$person->protectedMethod();
-
-// Access public method
-
-$person->publicMethod();
-
-?>
+}
 
 
 
@@ -498,6 +116,230 @@ $person->publicMethod();
 
 
 
+
+
+PROGRAM NO. 03
+
+Write a program in java to read roll no,name & marks of 5 
+
+subjects, calculate total, percentage and display the grade 
+
+according to their percentage.
+
+import java.io.*;
+
+class Student1
+
+{
+
+int rollno,m1,m2,m3,m4,m5,total;
+
+float per;
+
+String name,grade;
+
+void getdata(int rn,string n,int p1,int p2,int p3,int 
+
+p4,int p5)
+
+{ rollno=rn;
+
+ name=n;
+
+ m1=p1;
+
+m2=p2;
+
+m3=p3;
+
+m4=p4;
+
+m5=p5; }
+
+ void total()
+
+{ total=m1+m2+m3+m4+m5; }
+
+void percentage()
+
+{ per=total*100/500; }
+
+void grade()
+
+{ if(per>75)
+
+grade="distinction";
+
+else if(per>=60 && per<=75)
+
+grade="First division";
+
+else if(per>=50 && per<=60)
+
+grade="second division";
+
+else if(per>=35 && per<=50)
+
+grade="third division";
+
+else
+
+grade="Fail"; }
+
+void display()
+
+{
+
+System.out.println("\t\t\tMarksheet\t\t");
+
+System.out.println("\t\t\t-----------\t\n");
+
+System.out.println("roll 
+
+no.\tname\tm1\tm2\tm3\tm4\tm5\tTotal\tPer\tGrade");
+
+System.out.println(rollno+”\t”+name”\t”=m1+"\t"+m2+"\t
+
+"+m3+"\t"+m4+"\t"+m5+"\t"+total 
+
++"\t"+per+"\t"+grade); } 
+
+ }
+
+class Student
+
+{
+
+public static void main(String args[])throws IOException
+
+{ int rollno,m1,m2,m3,m4,m5,total;
+
+float per;
+
+String name,grade;
+
+InputStreamReader reader=new 
+
+InputStreamReader(System.in);BufferedReader din=new BufferedReader(reader);
+
+System.out.println("Enter the rollno,name & marks for five 
+
+subject:");
+
+rollno=Integer.parseInt(din.readLine());
+
+name=String.parseString(din.readLine());
+
+m1=Integer.parseInt(din.readLine());
+
+m2=Integer.parseInt(din.readLine());
+
+m3=Integer.parseInt(din.readLine());
+
+m4=Integer.parseInt(din.readLine());
+
+m5=Integer.parseInt(din.readLine());
+
+Student1 s=new Student1();
+
+s.getdata(rollno,name,m1,m2,m3,m4,m5);
+
+s.total();
+
+s.percentage();
+
+s.grade();
+
+s.display();}}
+
+
+
+
+
+
+
+
+
+
+PROGRAM NO . 04
+
+ Write a program in Java to demonstrate the concept 
+
+overloading of constructor.
+
+import java.io.*;
+
+class Rectangle
+
+{int length,breadth;
+
+Rectangle()
+
+{length=100;
+
+breadth=200;}
+
+Rectangle(int l,int b)
+
+{length=l;
+
+breadth=b}
+
+ Rectangle(Rectangle ob)
+
+ {length=ob.length;
+
+breadth=ob.breadth;}
+
+int rectArea()
+
+{return(length*breadth);}
+
+void show()
+
+{System.out.println("Length="+length);
+
+System.out.println("Breadth="+breadth);}
+
+}
+
+class Rectangle1
+
+{
+
+public static void main(String args[])throws IOException
+
+{
+
+int area;
+
+ Rectangle r1=new Rectangle();
+
+ Rectangle r2=new Rectangle(10,20);
+
+ Rectangle r3=new Rectangle(r2);
+
+r1.show();
+
+area=r1.rectArea();
+
+System.out.println("Area of rectangle is:="+area);
+
+r2.show();
+
+area=r2.rectArea();
+
+System.out.println("Area of rectangle is:="+area);
+
+r3.show();
+
+area=r3.rectArea();
+
+System.out.println("Area of rectangle is:="+area);
+
+}
+
+}
 
 
 
